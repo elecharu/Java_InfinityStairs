@@ -46,8 +46,7 @@ public class Login extends JFrame {
         result = db.join(ID,PW);
 
         if(result == -1) {
-            //Sresult = "아이디중복";
-            System.out.println("Already Create ID\n");
+            System.out.println("Already Create ID\n");//아이디 중복
         }
     }
 
@@ -57,18 +56,13 @@ public class Login extends JFrame {
         String PW = PWfield.getText();
         result = db.login(ID,PW);
         if (result == -1) {
-            //Sresult = "아이디없음";
-            System.out.println("Don't Exist ID\n");
-            //pwText = "";
+            System.out.println("Don't Exist ID\n");//이미 존재하는 ID
         }
         if (result == -2) {
-            //Sresult = "비밀번호실패";
-            System.out.println("Please Check PW\n");
-            //pwText = "";
+            System.out.println("Please Check PW\n");//비밀번호가 틀린경우
         }
         if (result == -3) {
-            //Sresult = "DB연동 오류";
-            System.out.println("DB Error\n");
+            System.out.println("DB Error\n");//DB연동 오류
         }
     }
 

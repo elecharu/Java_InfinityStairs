@@ -46,7 +46,6 @@ public class DB {
             rs = pstmt.executeQuery(); //SQL 값받기
             if(!rs.next()) { //만약 해당 userID가 조회되지 않으면 진행
                 SQL = "INSERT INTO USER VALUES(?,?,?)"; //user테이블에 값2개를 순서대로 추가하는 명령문
-                //SQL = "INSERT INTO USER VALUES(?,?)"; //user테이블에 값2개를 순서대로 추가하는 명령문
                 pstmt = (PreparedStatement) conn.prepareStatement(SQL); //SQL문 작성
                 pstmt.setString(1, userID);
                 pstmt.setString(2, userPassword);
