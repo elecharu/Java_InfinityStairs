@@ -15,6 +15,7 @@ public class Login extends JFrame {
     private JPasswordField PWfield = new JPasswordField("");
     private JButton LoginButton = new JButton("Login");
     private JButton JoinButton = new JButton("Join");
+    private JButton FindButton = new JButton("ID/PW Find");
     //------------------------------------------------//GUI 부분
     private String ID = "";
     private String PW = "";
@@ -47,6 +48,7 @@ public class Login extends JFrame {
 
         if(result == -1) {
             System.out.println("Already Create ID\n");//아이디 중복
+            JOptionPane.showMessageDialog(null, "Already Create ID");//화면 가운데에 메시지출력
         }
     }
 
@@ -56,13 +58,16 @@ public class Login extends JFrame {
         String PW = PWfield.getText();
         result = db.login(ID,PW);
         if (result == -1) {
-            System.out.println("Don't Exist ID\n");//이미 존재하는 ID
+            System.out.println("Don't Exist ID\n");//존재하지 않는 ID
+            JOptionPane.showMessageDialog(null, "Don't Exist ID");//화면 가운데에 메시지출력
         }
         if (result == -2) {
             System.out.println("Please Check PW\n");//비밀번호가 틀린경우
+            JOptionPane.showMessageDialog(null, "Please Check PW");//화면 가운데에 메시지출력
         }
         if (result == -3) {
             System.out.println("DB Error\n");//DB연동 오류
+            JOptionPane.showMessageDialog(null, "DB Error.");//화면 가운데에 메시지출력
         }
     }
 
@@ -98,13 +103,15 @@ public class Login extends JFrame {
         IDfield.setBounds(160, 355, 143, 25);
         PWfield.setBounds(160, 385, 143, 25);
         LoginButton.setBounds(310, 355, 87, 53);
-        JoinButton.setBounds(160, 420, 237, 27);
+        FindButton.setBounds(160, 420, 115, 27);
+        JoinButton.setBounds(282, 420, 115, 27);
         //--------------------------------------------------------------
         frame.add(IDLabel);
         frame.add(PWLabel);
         frame.add(IDfield);
         frame.add(PWfield);
         frame.add(LoginButton);
+        frame.add(FindButton);
         frame.add(JoinButton);
         frame.setVisible(true);
         frame.setResizable(false);	//크기조절
@@ -119,6 +126,7 @@ public class Login extends JFrame {
 
                 if(ID.isEmpty() || PW.isEmpty()) {
                     System.out.println("Please Check ID,PW\n");
+                    JOptionPane.showMessageDialog(null, "Please Input ID,PW");//화면 가운데에 메시지출력
                 }
                 else {
                     login_result();
@@ -139,10 +147,20 @@ public class Login extends JFrame {
                 PW = PWfield.getText();
                 frame.dispose();
                 JoinForm joinform = new JoinForm();
-                System.out.println("Click to JoinButton\n");
+                System.out.println("JoinButton Click\n");
             }
 
         });
+
+       FindButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                FindForm find = new FindForm();
+                System.out.println("FindButton Click\n");
+            }
+
+        });
+
     }
 }
 

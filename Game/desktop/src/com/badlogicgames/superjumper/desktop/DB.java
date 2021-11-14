@@ -10,7 +10,8 @@ public class DB {
     // mysql 접속
     public DB() {
         try {
-            String dbURL = "jdbc:mysql://220.89.66.203:3306/InfinityStairs"; // DB주소 "아이피 주소 포트포워딩 해야함"
+            String dbURL = "jdbc:mysql://localhost:3306/InfinityStairs"; // DB주소 "아이피 주소 포트포워딩 해야함"
+            //String dbURL = "jdbc:mysql://220.89.66.203:3306/InfinityStairs"; // DB주소 "아이피 주소 포트포워딩 해야함"
             String dbID = "root";   //DB ID
             String dbPassword = "root";     //DB PW
             Class.forName("com.mysql.jdbc.Driver"); // JDBC 드라이버 로딩
@@ -57,7 +58,7 @@ public class DB {
         }catch(SQLException e) {}
         return -3; // DB접속오류
     }
-    /*
+
     //암호찾기
     public String pwFind(String userID) {
         String SQL = "SELECT userPassword FROM USER WHERE userID = ?"; //해당 userID가 존재하면 userPassword 출력

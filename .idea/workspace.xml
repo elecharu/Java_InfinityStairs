@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81b1e350-4143-4e00-95a2-cc8b01990f71" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java_InfinityStairs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/Starscape00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/Starscape01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/Starscape02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/Starscape03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/click.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/coin.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/font.fnt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/font.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/help.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/help1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/help2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/help3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/help4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/help5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/highjump.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/hit.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/items.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/items.ugh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/jump.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/assets/data/music.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/ic_launcher-web.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/proguard-project.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/res/drawable-hdpi/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/res/drawable-ldpi/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/res/drawable-mdpi/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/res/drawable/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/com/badlogicgames/superjumper/android/AndroidLauncher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/SuperJumper.gwt.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Animation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Assets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Bob.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Castle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Coin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/DynamicGameObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/GameObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/GameScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/HelpScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/HelpScreen2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/HelpScreen3.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/HelpScreen4.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/HelpScreen5.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/HighscoresScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/MainMenuScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Platform.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Settings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Spring.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/Squirrel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/SuperJumper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/WinScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/World.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/badlogicgames/superjumper/WorldRenderer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/desktop/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/desktop/src/com/badlogicgames/superjumper/desktop/DB.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/desktop/src/com/badlogicgames/superjumper/desktop/DesktopLauncher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/desktop/src/com/badlogicgames/superjumper/desktop/JoinForm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/desktop/src/com/badlogicgames/superjumper/desktop/Login.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/src/com/badlogicgames/superjumper/GdxDefinition.gwt.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/src/com/badlogicgames/superjumper/GdxDefinitionSuperdev.gwt.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/src/com/badlogicgames/superjumper/client/HtmlLauncher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/webapp/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/webapp/soundmanager2-jsmin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/webapp/soundmanager2-setup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/webapp/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Info.plist.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Default-568h@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Default@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Default@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Default~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Icon-72.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Icon-72@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/data/Icon@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/robovm.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/robovm.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/src/com/badlogicgames/superjumper/IOSLauncher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="20K3iMgJi4JO0LN37djatCq19I7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81b1e350-4143-4e00-95a2-cc8b01990f71" name="Changes" comment="" />
+      <created>1635779583211</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635779583211</updated>
+    </task>
+    <servers />
+  </component>
+</project>

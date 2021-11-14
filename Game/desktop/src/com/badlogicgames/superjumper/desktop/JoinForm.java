@@ -33,8 +33,10 @@ public class JoinForm extends JFrame {
         } else if(result == -1) {
             //Sresult = "아이디중복";
             System.out.println("Failed Join!\nAlready ID.\n");
+            JOptionPane.showMessageDialog(null, "Already Create ID");//화면 가운데에 메시지출력
         } else if(result == -3) {
             System.out.println("DB Error\n");
+            JOptionPane.showMessageDialog(null, "DB Error");//화면 가운데에 메시지출력
         }
     }
 
@@ -62,6 +64,8 @@ public class JoinForm extends JFrame {
         frame.setVisible(true);
         //--------------------------------------------------------------
 
+
+        //-- 회원가입 관련 --//
         JoinButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String ID = IDField.getText();
@@ -69,6 +73,7 @@ public class JoinForm extends JFrame {
                 System.out.println("Click JoinButton");
 
                 if(ID.isEmpty() || PW.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please Input ID,PW");//화면 가운데에 메시지출력
                     System.out.println("Please Input ID,PW\n");
                 } else {
                     join_result();
@@ -76,7 +81,7 @@ public class JoinForm extends JFrame {
             }
 
         });
-
+        //-- 취소 관련 --//
         CancleButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
