@@ -10,8 +10,8 @@ public class DB {
     // mysql 접속
     public DB() {
         try {
-            String dbURL = "jdbc:mysql://localhost:3306/InfinityStairs"; // DB주소 "아이피 주소 포트포워딩 해야함"
             //String dbURL = "jdbc:mysql://220.89.66.203:3306/InfinityStairs"; // DB주소 "아이피 주소 포트포워딩 해야함"
+            String dbURL = "jdbc:mysql://localhost:3306/InfinityStairs"; // DB주소 "아이피 주소 포트포워딩 해야함"
             String dbID = "root";   //DB ID
             String dbPassword = "root";     //DB PW
             Class.forName("com.mysql.jdbc.Driver"); // JDBC 드라이버 로딩
@@ -47,6 +47,7 @@ public class DB {
             rs = pstmt.executeQuery(); //SQL 값받기
             if(!rs.next()) { //만약 해당 userID가 조회되지 않으면 진행
                 SQL = "INSERT INTO USER VALUES(?,?,?)"; //user테이블에 값2개를 순서대로 추가하는 명령문
+                //SQL = "INSERT INTO USER VALUES(?,?)"; //user테이블에 값2개를 순서대로 추가하는 명령문
                 pstmt = (PreparedStatement) conn.prepareStatement(SQL); //SQL문 작성
                 pstmt.setString(1, userID);
                 pstmt.setString(2, userPassword);

@@ -64,13 +64,14 @@ public class Assets {
 	}
 
 	public static void load () {
-		background = loadTexture("data/background.png");
-		backgrounds = new Texture[4];
+		background = loadTexture("data/mainmenu.png");
+		backgrounds = new Texture[5];
 		backgrounds[0] = new Texture("data/Starscape00.png");
 		backgrounds[1] = new Texture("data/Starscape01.png");
 		backgrounds[2] = new Texture("data/Starscape02.png");
 		backgrounds[3] = new Texture("data/Starscape03.png");
-		backgroundRegion = new TextureRegion(background, 0, 0, 320, 480);
+		backgrounds[4] = new Texture("data/Starscape04.png");
+		backgroundRegion = new TextureRegion(background, 0, 0, 540, 960);
 
 		items = loadTexture("data/items.png");
 		mainMenu = new TextureRegion(items, 0, 224, 300, 110);

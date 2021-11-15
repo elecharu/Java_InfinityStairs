@@ -24,11 +24,16 @@ public class WorldRenderer {
 	static final float FRUSTUM_WIDTH = 10;
 	static final float FRUSTUM_HEIGHT = 15;
 
-	private float[] backgroundOffsets = {0, 0, 0, 0};
-	float adjustedBackgroundOffset;
+	private float[] backgroundOffsets = {0, 0, 0, 0, 0};
 	World world;
 	OrthographicCamera cam;
 	SpriteBatch batch;
+
+	public void setBackgroundOffsets(float[] backgroundOffsets) {
+		this.backgroundOffsets = backgroundOffsets;
+	}
+
+
 
 	public WorldRenderer (SpriteBatch batch, World world) {
 		this.world = world;
@@ -38,8 +43,8 @@ public class WorldRenderer {
 	}
 
 	public void render () {
-		if (world.bob.position.y > cam.position.y) cam.position.y = world.bob.position.y;
-		cam.position.x = world.bob.position.x;
+		if (world.player.position.y > cam.position.y) cam.position.y = world.player.position.y;
+		cam.position.x = world.player.position.x;
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 		renderBackground();
@@ -50,32 +55,39 @@ public class WorldRenderer {
 		batch.begin();
 		float offsetCompensation = (cam.position.y - FRUSTUM_HEIGHT/2);
 		batch.draw(Assets.backgrounds[0], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[0] + offsetCompensation, FRUSTUM_WIDTH,
-				FRUSTUM_HEIGHT);
+				FRUSTUM_HEIGHT*2);
 		batch.draw(Assets.backgrounds[1], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[1] + offsetCompensation / 1.15f, FRUSTUM_WIDTH,
-				FRUSTUM_HEIGHT);
-		batch.draw(Assets.backgrounds[1], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[1] + offsetCompensation / 1.15f + FRUSTUM_HEIGHT, FRUSTUM_WIDTH,
-				FRUSTUM_HEIGHT);
+				FRUSTUM_HEIGHT*2);
+		batch.draw(Assets.backgrounds[1], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[1] + offsetCompensation / 1.15f + FRUSTUM_HEIGHT*2, FRUSTUM_WIDTH,
+				FRUSTUM_HEIGHT*2);
 		batch.draw(Assets.backgrounds[2], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[2] + offsetCompensation / 1.3f, FRUSTUM_WIDTH,
-				FRUSTUM_HEIGHT);
-		batch.draw(Assets.backgrounds[2], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[2] + offsetCompensation / 1.3f + FRUSTUM_HEIGHT, FRUSTUM_WIDTH,
-				FRUSTUM_HEIGHT);
+				FRUSTUM_HEIGHT*2);
+		batch.draw(Assets.backgrounds[2], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[2] + offsetCompensation / 1.3f + FRUSTUM_HEIGHT*2, FRUSTUM_WIDTH,
+				FRUSTUM_HEIGHT*2);
 		batch.draw(Assets.backgrounds[3], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[3] + offsetCompensation / 1.45f, FRUSTUM_WIDTH,
-				FRUSTUM_HEIGHT);
-		batch.draw(Assets.backgrounds[3], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[3] + offsetCompensation / 1.45f + FRUSTUM_HEIGHT, FRUSTUM_WIDTH,
-				FRUSTUM_HEIGHT);
+				FRUSTUM_HEIGHT*2);
+		batch.draw(Assets.backgrounds[3], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[3] + offsetCompensation / 1.45f + FRUSTUM_HEIGHT*2, FRUSTUM_WIDTH,
+				FRUSTUM_HEIGHT*2);
+		batch.draw(Assets.backgrounds[4], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[3] + offsetCompensation / 1.65f, FRUSTUM_WIDTH,
+				FRUSTUM_HEIGHT*2);
+		batch.draw(Assets.backgrounds[4], cam.position.x - FRUSTUM_WIDTH / 2, backgroundOffsets[3] + offsetCompensation / 1.65f + FRUSTUM_HEIGHT*2, FRUSTUM_WIDTH,
+				FRUSTUM_HEIGHT*2);
 
-		if(backgroundOffsets[1] + offsetCompensation / 1.15f < cam.position.y - 22.5){
-
-			backgroundOffsets[1] += 15;
+		if(backgroundOffsets[1] + offsetCompensation / 1.15f < cam.position.y - 37.5){
+			backgroundOffsets[1] += FRUSTUM_HEIGHT*2;
 			System.out.println(backgroundOffsets[1]);
 		}
-		if(backgroundOffsets[2] + offsetCompensation / 1.3f < cam.position.y - 22.5){
-			backgroundOffsets[2] += 15;
+		if(backgroundOffsets[2] + offsetCompensation / 1.3f < cam.position.y - 37.5){
+			backgroundOffsets[2] += FRUSTUM_HEIGHT*2;
 			System.out.println(backgroundOffsets[2]);
 		}
-		if(backgroundOffsets[3] + offsetCompensation / 1.45f < cam.position.y - 22.5){
-			backgroundOffsets[3] += 15;
+		if(backgroundOffsets[3] + offsetCompensation / 1.45f < cam.position.y - 37.5){
+			backgroundOffsets[3] += FRUSTUM_HEIGHT*2;
 			System.out.println(backgroundOffsets[3]);
+		}
+		if(backgroundOffsets[4] + offsetCompensation / 1.65f < cam.position.y - 37.5){
+			backgroundOffsets[4] += FRUSTUM_HEIGHT*2;
+			System.out.println(backgroundOffsets[4]);
 		}
 
 		batch.end();
@@ -84,45 +96,44 @@ public class WorldRenderer {
 	public void renderObjects () {
 		batch.enableBlending();
 		batch.begin();
-		renderPlatforms();
+		renderStairs();
 		renderBob();
 		renderItems();
 		renderSquirrels();
-		renderCastle();
 		batch.end();
 	}
 
 	private void renderBob () {
 		TextureRegion keyFrame;
 		//에니메이션
-		switch (world.bob.state) {
-		case Bob.BOB_STATE_FALL:
-			keyFrame = Assets.bobFall.getKeyFrame(world.bob.stateTime, Animation.ANIMATION_LOOPING);
+		switch (world.player.state) {
+		case Player.PLAYER_STATE_FALL:
+			keyFrame = Assets.bobFall.getKeyFrame(world.player.stateTime, Animation.ANIMATION_LOOPING);
 			break;
-		case Bob.BOB_STATE_JUMP:
-			keyFrame = Assets.bobJump.getKeyFrame(world.bob.stateTime, Animation.ANIMATION_LOOPING);
+		case Player.PLAYER_STATE_IDLE:
+			keyFrame = Assets.bobJump.getKeyFrame(world.player.stateTime, Animation.ANIMATION_LOOPING);
 			break;
-		case Bob.BOB_STATE_HIT:
+		case Player.PLAYER_STATE_HIT:
 		default:
 			keyFrame = Assets.bobHit;
 		}
 
 		//좌우반전
-		if (Bob.isLookingLeft)
-			batch.draw(keyFrame, world.bob.position.x + 0.5f, world.bob.position.y - 0.5f, -1, 1);
+		if (Player.isLookingLeft)
+			batch.draw(keyFrame, world.player.position.x + 0.5f, world.player.position.y - 0.5f, -1, 1);
 		else
-			batch.draw(keyFrame, world.bob.position.x - 0.5f, world.bob.position.y - 0.5f, 1, 1);
+			batch.draw(keyFrame, world.player.position.x - 0.5f, world.player.position.y - 0.5f, 1, 1);
 	}
 
-	private void renderPlatforms () {
-		int len = world.platforms.size();
+	private void renderStairs () {
+		int len = world.stairs.size();
 		for (int i = 0; i < len; i++) {
-			Platform platform = world.platforms.get(i);
+			Stair stair = world.stairs.get(i);
 			TextureRegion keyFrame = Assets.platform;
-			if (platform.state == Platform.PLATFORM_STATE_PULVERIZING) {
-				keyFrame = Assets.brakingPlatform.getKeyFrame(platform.stateTime, Animation.ANIMATION_NONLOOPING);
+			if (stair.state == Stair.STAIR_STATE_PULVERIZING) {
+				keyFrame = Assets.brakingPlatform.getKeyFrame(stair.stateTime, Animation.ANIMATION_NONLOOPING);
 			}
-			batch.draw(keyFrame, platform.position.x - 1, platform.position.y - 0.25f, 2, 0.5f);
+			batch.draw(keyFrame, stair.position.x - 1, stair.position.y - 0.25f, 2, 0.5f);
 		}
 	}
 
@@ -154,8 +165,4 @@ public class WorldRenderer {
 		}
 	}
 
-	private void renderCastle () {
-		Castle castle = world.castle;
-		batch.draw(Assets.castle, castle.position.x - 1, castle.position.y - 1, 2, 2);
-	}
 }

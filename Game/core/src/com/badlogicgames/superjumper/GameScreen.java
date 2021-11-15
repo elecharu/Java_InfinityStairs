@@ -149,8 +149,8 @@ public class GameScreen extends ScreenAdapter {
 		}
 		if(world.state == World.WORLD_STATE_RUNNING){
 
-			timePassedSecond = (int) world.bob.stateTime % 60;
-			timePassedMinute = (int) world.bob.stateTime / 60;
+			timePassedSecond = (int) world.player.stateTime % 60;
+			timePassedMinute = (int) world.player.stateTime / 60;
 			timeString = "TIME : " + timePassedMinute + ":" + timePassedSecond;
 		}
 		if (world.state == World.WORLD_STATE_NEXT_LEVEL) {
@@ -180,7 +180,7 @@ public class GameScreen extends ScreenAdapter {
 
 			if (quitBounds.contains(touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new MainMenuScreen(game));
 				return;
 			}
 		}

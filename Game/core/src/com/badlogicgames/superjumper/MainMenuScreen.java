@@ -31,14 +31,15 @@ public class MainMenuScreen extends ScreenAdapter {
 	Rectangle highscoresBounds;
 	Rectangle helpBounds;
 	Vector3 touchPoint;
+	private float[] backgroundOffsets = {0, 0, 0, 0, 0};
+	private float backgroundMaxScrollingSpeed = 100.0f;
 
 	public MainMenuScreen (SuperJumper game) {
 		this.game = game;
-
-		guiCam = new OrthographicCamera(320, 480);
-		guiCam.position.set(320 / 2, 480 / 2, 0);
+		guiCam = new OrthographicCamera(540, 960);
+		guiCam.position.set(540 / 2, 960 / 2, 0);
 		soundBounds = new Rectangle(0, 0, 64, 64);
-		playBounds = new Rectangle(160 - 150, 200 + 18, 300, 36);
+		playBounds = new Rectangle(60, 180, 180, 120);
 		highscoresBounds = new Rectangle(160 - 150, 200 - 18, 300, 36);
 		helpBounds = new Rectangle(160 - 150, 200 - 18 - 36, 300, 36);
 		touchPoint = new Vector3();
@@ -53,7 +54,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				game.setScreen(new GameScreen(game));
 				return;
 			}
-			if (highscoresBounds.contains(touchPoint.x, touchPoint.y)) {
+			/*if (highscoresBounds.contains(touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new HighscoresScreen(game));
 				return;
@@ -62,7 +63,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new HelpScreen(game));
 				return;
-			}
+			}*/
 			if (soundBounds.contains(touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
 				Settings.soundEnabled = !Settings.soundEnabled;
@@ -74,22 +75,24 @@ public class MainMenuScreen extends ScreenAdapter {
 		}
 	}
 
-	public void draw () {
+	public void draw (float deltaTime) {
 		GL20 gl = Gdx.gl;
 		gl.glClearColor(1, 0, 0, 1);
 		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		guiCam.update();
 		game.batcher.setProjectionMatrix(guiCam.combined);
 
-		game.batcher.disableBlending();
+		game.batcher.enableBlending();
 		game.batcher.begin();
-		game.batcher.draw(Assets.backgroundRegion, 0, 0, 320, 480);
+		renderBackground(deltaTime);
+		game.batcher.draw(Assets.backgroundRegion, 0, 0, 540, 960);
 		game.batcher.end();
 
 		game.batcher.enableBlending();
 		game.batcher.begin();
-		game.batcher.draw(Assets.logo, 160 - 274 / 2, 480 - 10 - 142, 274, 142);
-		game.batcher.draw(Assets.mainMenu, 10, 200 - 110 / 2, 300, 110);
+
+		//game.batcher.draw(Assets.logo, 160 - 274 / 2, 480 - 10 - 142, 274, 142);
+		//game.batcher.draw(Assets.mainMenu, 10, 200 - 110 / 2, 300, 110);
 		game.batcher.draw(Settings.soundEnabled ? Assets.soundOn : Assets.soundOff, 0, 0, 64, 64);
 		game.batcher.end();	
 	}
@@ -97,11 +100,33 @@ public class MainMenuScreen extends ScreenAdapter {
 	@Override
 	public void render (float delta) {
 		update();
-		draw();
+		draw(delta);
 	}
 
 	@Override
 	public void pause () {
 		Settings.save();
+	}
+
+	private void renderBackground(float deltaTime) {
+		backgroundOffsets[0] += deltaTime * backgroundMaxScrollingSpeed / 16;
+		backgroundOffsets[1] += deltaTime * backgroundMaxScrollingSpeed / 8;
+		backgroundOffsets[2] += deltaTime * backgroundMaxScrollingSpeed / 4;
+		backgroundOffsets[3] += deltaTime * backgroundMaxScrollingSpeed / 2;
+		backgroundOffsets[4] += deltaTime * backgroundMaxScrollingSpeed;
+
+		for (int layer = 0; layer < backgroundOffsets.length; layer++) {
+			if (backgroundOffsets[layer] > 1920) {
+				backgroundOffsets[layer] = 0;
+			}
+			game.batcher.draw(Assets.backgrounds[layer],
+					0,
+					-backgroundOffsets[layer],
+					540, 1920);
+			game.batcher.draw(Assets.backgrounds[layer],
+					0,
+					-backgroundOffsets[layer] + 1920,
+					540, 1920);
+		}
 	}
 }

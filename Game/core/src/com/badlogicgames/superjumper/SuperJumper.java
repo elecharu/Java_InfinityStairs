@@ -28,7 +28,7 @@ public class SuperJumper extends Game {
 		batcher = new SpriteBatch();
 		Settings.load();
 		Assets.load();
-		setScreen(new GameScreen(this));
+		setScreen(new MainMenuScreen(this));
 	}
 	
 	@Override

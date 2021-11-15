@@ -78,15 +78,12 @@ public class Login extends JFrame {
 	public String getNickText() {
 		return nickText;
 	}
-
 	public String getPwText() {
 		return pwText;
 	}
-
 	public boolean isJoin() {
 		return join;
 	}
-
 	public boolean isPwFind() {
 		return pwFind;
 	}
@@ -133,7 +130,6 @@ public class Login extends JFrame {
                     if(result == 0) {
                         System.out.println("Login Success!\n");
                         frame.dispose();
-                        //NextForm nextform = new NextForm();
                         JOptionPane.showMessageDialog(null, "Welcome " + IDfield.getText());//화면 가운데에 메시지출력
                         DesktopLauncher desktopLauncher = new DesktopLauncher();
                     }
@@ -152,7 +148,7 @@ public class Login extends JFrame {
 
         });
 
-       FindButton.addActionListener(new ActionListener() {
+        FindButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 FindForm find = new FindForm();
@@ -163,4 +159,3 @@ public class Login extends JFrame {
 
     }
 }
-
