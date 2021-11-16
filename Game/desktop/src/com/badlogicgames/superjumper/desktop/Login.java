@@ -13,12 +13,13 @@ public class Login extends JFrame {
     private JLabel PWLabel = new JLabel("PW :");
     private JTextField IDfield = new JTextField("");
     private JPasswordField PWfield = new JPasswordField("");
-    private JButton LoginButton = new JButton("Login");
-    private JButton JoinButton = new JButton("Join");
-    private JButton FindButton = new JButton("ID/PW Find");
+    private JButton LoginButton = new JButton("로그인");
+    private JButton JoinButton = new JButton("회원가입");
+    private JButton FindButton = new JButton("비밀번호 찾기");
     //------------------------------------------------//GUI 부분
     private String ID = "";
     private String PW = "";
+    private String Email = "";
     private int result = -5; // 1성공, 0비번실패, -1아이디실패, -2 DB오류
     //------------------------------------------------//DB 연결할 때 사용할꺼
 
@@ -43,12 +44,12 @@ public class Login extends JFrame {
     }
     */
     private void join_result() {
-        System.out.println("Input ID:"+ ID + ", Input PW: " + PW);
-        result = db.join(ID,PW);
+        System.out.println("입력한 ID:"+ ID + ", 입력한 PW: " + PW);
+        result = db.join(ID,PW,Email);
 
         if(result == -1) {
-            System.out.println("Already Create ID\n");//아이디 중복
-            JOptionPane.showMessageDialog(null, "Already Create ID");//화면 가운데에 메시지출력
+            System.out.println("이미 존재하는 ID입니다.\n");//아이디 중복
+            JOptionPane.showMessageDialog(null, "이미 존재하는 ID입니다.");//화면 가운데에 메시지출력
         }
     }
 
@@ -58,16 +59,16 @@ public class Login extends JFrame {
         String PW = PWfield.getText();
         result = db.login(ID,PW);
         if (result == -1) {
-            System.out.println("Don't Exist ID\n");//존재하지 않는 ID
-            JOptionPane.showMessageDialog(null, "Don't Exist ID");//화면 가운데에 메시지출력
+            System.out.println("존재하지 않는 ID입니다.\n");//존재하지 않는 ID
+            JOptionPane.showMessageDialog(null, "존재하지 않는 ID입니다.");//화면 가운데에 메시지출력
         }
         if (result == -2) {
-            System.out.println("Please Check PW\n");//비밀번호가 틀린경우
-            JOptionPane.showMessageDialog(null, "Please Check PW");//화면 가운데에 메시지출력
+            System.out.println("비밀번호를 확인해주세요.\n");//비밀번호가 틀린경우
+            JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요");//화면 가운데에 메시지출력
         }
         if (result == -3) {
-            System.out.println("DB Error\n");//DB연동 오류
-            JOptionPane.showMessageDialog(null, "DB Error.");//화면 가운데에 메시지출력
+            System.out.println("DB연동 오류\n");//DB연동 오류
+            JOptionPane.showMessageDialog(null, "DB연동 오류.");//화면 가운데에 메시지출력
         }
     }
 
@@ -90,7 +91,7 @@ public class Login extends JFrame {
 	*/
 
     public Login() {
-        frame.setTitle("Infinity Stairs");
+        frame.setTitle("무한의 계단");
         frame.setSize(540,650);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,19 +119,19 @@ public class Login extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 ID = IDfield.getText();
                 PW = PWfield.getText();
-                System.out.printf("Input ID: %s, Input PW: %s\n", ID, PW);
-                System.out.println("Login Button Click");
+                System.out.printf("입력한 ID: %s, 입력한 PW: %s\n", ID, PW);
+                System.out.println("로그인 버튼 클릭!");
 
                 if(ID.isEmpty() || PW.isEmpty()) {
-                    System.out.println("Please Check ID,PW\n");
-                    JOptionPane.showMessageDialog(null, "Please Input ID,PW");//화면 가운데에 메시지출력
+                    System.out.println("ID,PW를 입력해주세요.\n");
+                    JOptionPane.showMessageDialog(null, "아이디,비번을 입력해주세요");//화면 가운데에 메시지출력
                 }
                 else {
                     login_result();
                     if(result == 0) {
-                        System.out.println("Login Success!\n");
+                        System.out.println("로그인 성공!\n");
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Welcome " + IDfield.getText());//화면 가운데에 메시지출력
+                        JOptionPane.showMessageDialog(null, IDfield.getText()+ "님 환엽합니다.");//화면 가운데에 메시지출력
                         DesktopLauncher desktopLauncher = new DesktopLauncher();
                     }
                 }
@@ -143,7 +144,7 @@ public class Login extends JFrame {
                 PW = PWfield.getText();
                 frame.dispose();
                 JoinForm joinform = new JoinForm();
-                System.out.println("JoinButton Click\n");
+                System.out.println("회원가입 버튼 클릭!\n");
             }
 
         });
@@ -152,7 +153,7 @@ public class Login extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 FindForm find = new FindForm();
-                System.out.println("FindButton Click\n");
+                System.out.println("비밀번호 찾기 버튼 클릭!\n");
             }
 
         });

@@ -8,7 +8,7 @@ public class DesktopLauncher {
 
 	public DesktopLauncher() {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "InfinityStairs";
+		config.title = "무한의 계단";
 		config.width = 540;
 		config.height = 960;
 		config.resizable = false;

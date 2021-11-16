@@ -6,6 +6,7 @@ public class DB {
     private Connection conn; // db에 접근해주게 하는 객체
     private PreparedStatement pstmt;
     private ResultSet rs;
+    private String userEmail;
 
     // mysql 접속
     public DB() {
@@ -39,7 +40,7 @@ public class DB {
     }
 
     // 가입시도
-    public int join(String userID, String userPassword) {
+    public int join(String userID, String userPassword, String userEmail) {
         String SQL = "SELECT userID FROM USER WHERE userID = ?"; //userID가 있으면 해당 userID조회
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(SQL); // SQL문 작성
@@ -51,7 +52,10 @@ public class DB {
                 pstmt = (PreparedStatement) conn.prepareStatement(SQL); //SQL문 작성
                 pstmt.setString(1, userID);
                 pstmt.setString(2, userPassword);
-                pstmt.setInt(3, 0); //포인트 0점
+                pstmt.setString(3, userEmail); //포인트 0점
+                //pstmt.setInt(3, 1000);
+               // pstmt.setInt(4, 1000); // 싱글 포인트 0점
+                //pstmt.setInt(5, 1000); // 멀티 포인트 0점
                 pstmt.executeUpdate(); //SQL문 실행
                 return 1; //가입성공
             } else
@@ -61,18 +65,19 @@ public class DB {
     }
 
     //암호찾기
-    public String pwFind(String userID) {
-        String SQL = "SELECT userPassword FROM USER WHERE userID = ?"; //해당 userID가 존재하면 userPassword 출력
+    public String pwFind(String userID, String userEmail) {
+        String SQL = "SELECT userPassword FROM USER WHERE userID = ? AND userEmail = ?"; //해당 userID가 존재하면 userPassword 출력
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(SQL); // SQL문 작성
             pstmt.setString(1, userID);
+            pstmt.setString(2, userEmail);
             rs = pstmt.executeQuery(); //SQL 값받기
         if(rs.next()) {
-            return rs.getString(1); // 암호찾기성공 및 해당 userPassword 값 반환
+            return "비밀번호는 "+ rs.getString(1)+"입니다."; // 암호찾기성공 및 해당 userPassword 값 반환
         } else
-            return "미가입 닉네임";
+            return "미가입 계정이거나 혹은 이메일을 확인해주세요.";
         }catch(SQLException e) {}
-        return "DB오류"; // DB접속오류
+        return "DB연동 오류"; // DB접속오류
     }
     /*
 
