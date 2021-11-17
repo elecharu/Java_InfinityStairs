@@ -211,7 +211,6 @@ public class GameScreen extends ScreenAdapter {
 		game.batcher.setProjectionMatrix(guiCam.combined);
 		game.batcher.enableBlending();
 		game.batcher.begin();
-		System.out.println(state);
 		switch (state) {
 		case GAME_READY:
 			presentReady();

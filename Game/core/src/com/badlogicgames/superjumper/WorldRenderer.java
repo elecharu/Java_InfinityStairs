@@ -75,19 +75,15 @@ public class WorldRenderer {
 
 		if(backgroundOffsets[1] + offsetCompensation / 1.15f < cam.position.y - 37.5){
 			backgroundOffsets[1] += FRUSTUM_HEIGHT*2;
-			System.out.println(backgroundOffsets[1]);
 		}
 		if(backgroundOffsets[2] + offsetCompensation / 1.3f < cam.position.y - 37.5){
 			backgroundOffsets[2] += FRUSTUM_HEIGHT*2;
-			System.out.println(backgroundOffsets[2]);
 		}
 		if(backgroundOffsets[3] + offsetCompensation / 1.45f < cam.position.y - 37.5){
 			backgroundOffsets[3] += FRUSTUM_HEIGHT*2;
-			System.out.println(backgroundOffsets[3]);
 		}
 		if(backgroundOffsets[4] + offsetCompensation / 1.65f < cam.position.y - 37.5){
 			backgroundOffsets[4] += FRUSTUM_HEIGHT*2;
-			System.out.println(backgroundOffsets[4]);
 		}
 
 		batch.end();
@@ -105,6 +101,7 @@ public class WorldRenderer {
 
 	private void renderBob () {
 		TextureRegion keyFrame;
+		TextureRegion keyFramePlayer2;
 		//에니메이션
 		switch (world.player.state) {
 		case Player.PLAYER_STATE_FALL:
@@ -118,11 +115,29 @@ public class WorldRenderer {
 			keyFrame = Assets.bobHit;
 		}
 
+		switch (world.player2.state) {
+			case Player.PLAYER_STATE_FALL:
+				keyFramePlayer2 = Assets.bobFall.getKeyFrame(world.player2.stateTime, Animation.ANIMATION_LOOPING);
+				break;
+			case Player.PLAYER_STATE_IDLE:
+				keyFramePlayer2 = Assets.bobJump.getKeyFrame(world.player2.stateTime, Animation.ANIMATION_LOOPING);
+				break;
+			case Player.PLAYER_STATE_HIT:
+			default:
+				keyFramePlayer2 = Assets.bobHit;
+		}
+
+
 		//좌우반전
-		if (Player.isLookingLeft)
+		if (world.player.isLookingLeft)
 			batch.draw(keyFrame, world.player.position.x + 0.5f, world.player.position.y - 0.5f, -1, 1);
 		else
 			batch.draw(keyFrame, world.player.position.x - 0.5f, world.player.position.y - 0.5f, 1, 1);
+
+		if (world.player2.isLookingLeft)
+			batch.draw(keyFramePlayer2, world.player2.position.x + 0.5f, world.player2.position.y - 0.5f, -1, 1);
+		else
+			batch.draw(keyFramePlayer2, world.player2.position.x - 0.5f, world.player2.position.y - 0.5f, 1, 1);
 	}
 
 	private void renderStairs () {

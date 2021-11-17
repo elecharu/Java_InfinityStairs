@@ -28,31 +28,38 @@ public class Player extends DynamicGameObject {
 	public static final int PLAYER_STATE_FAIL = 4;
 	public static final float PLAYER_WIDTH = 0.8f;
 	public static final float PLAYER_HEIGHT = 0.8f;
-	public static boolean isLookingLeft = false;
+	public boolean isLookingLeft = false;
 
 	public World world;
 
+	String name;
 	int score;
 	int state;
 	float stateTime;
 	float failTime;
 	float failHeight;
+	int KEY_LEFT;
+	int KEY_RIGHT;
+	boolean IsFailed = false;
 
-	public Player(float x, float y, World world) {
+	public Player(String name, float x, float y, World world, int left, int right) {
 		super(x, y, PLAYER_WIDTH, PLAYER_HEIGHT);
+		this.name = name;
 		this.world = world;
 		state = PLAYER_STATE_FALL;
 		stateTime = 0;
 		score = 1;
+		this.KEY_LEFT = left;
+		this.KEY_RIGHT = right;
 	}
 
 	public void update (float deltaTime) {
 		//키 입력 하면 올라가는 state 로 변경
-		if(Gdx.input.isKeyJustPressed(Input.Keys.DPAD_LEFT) && state != PLAYER_STATE_CLIMB
+		if(Gdx.input.isKeyJustPressed(KEY_LEFT) && state != PLAYER_STATE_CLIMB
 				&& state != PLAYER_STATE_FAIL && isCorrectMoveToLeft()) {
 			state = PLAYER_STATE_CLIMB;
 		}
-		if(Gdx.input.isKeyJustPressed(Input.Keys.DPAD_RIGHT) && state != PLAYER_STATE_CLIMB
+		if(Gdx.input.isKeyJustPressed(KEY_RIGHT) && state != PLAYER_STATE_CLIMB
 				&& state != PLAYER_STATE_FAIL && isCorrectMoveToRight()) {
 			state = PLAYER_STATE_CLIMB;
 		}
@@ -68,13 +75,14 @@ public class Player extends DynamicGameObject {
 			state = PLAYER_STATE_IDLE;
 		}
 
+		//실패시 왼쪽 또는 오른쪽으로 갔다가
 		if(state == PLAYER_STATE_FAIL){
 			if(isLookingLeft)
 				position.lerp(new Vector2(world.stairs.get(score).position.x-2, position.y), 25*deltaTime);
 			else
 				position.lerp(new Vector2(world.stairs.get(score).position.x+2, position.y), 25*deltaTime);
 		}
-
+		//떨어짐
 		if(state == PLAYER_STATE_FAIL && failTime+0.5 < stateTime){
 				position.lerp(new Vector2(position.x, failHeight-15f), deltaTime);
 		}
@@ -113,6 +121,7 @@ public class Player extends DynamicGameObject {
 		failTime = stateTime;
 		failHeight = position.y;
 		state = PLAYER_STATE_FAIL;
+		System.out.println(this.name + "의 최종 점수 = " + score + ", 생존 시간 = " + failTime);
 	}
 
 
