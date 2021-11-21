@@ -84,7 +84,7 @@ public class Player extends DynamicGameObject {
 		}
 		//떨어짐
 		if(state == PLAYER_STATE_FAIL && failTime+0.5 < stateTime){
-				position.lerp(new Vector2(position.x, failHeight-15f), deltaTime);
+				position.add(0, -10*deltaTime);
 		}
 
 		bounds.x = position.x - bounds.width / 2;
@@ -118,7 +118,7 @@ public class Player extends DynamicGameObject {
 	}
 
 	public void failRoutine(){
-		failTime = stateTime;
+		failTime = stateTime-0.1f;
 		failHeight = position.y;
 		state = PLAYER_STATE_FAIL;
 		System.out.println(this.name + "의 최종 점수 = " + score + ", 생존 시간 = " + failTime);

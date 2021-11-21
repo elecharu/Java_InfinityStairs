@@ -1,18 +1,3 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
 
 package com.badlogicgames.superjumper;
 
@@ -149,8 +134,8 @@ public class GameScreen extends ScreenAdapter {
 		}
 		if(world.state == World.WORLD_STATE_RUNNING){
 
-			timePassedSecond = (int) world.player.stateTime % 60;
-			timePassedMinute = (int) world.player.stateTime / 60;
+			timePassedSecond = (int) world.player1.stateTime % 60;
+			timePassedMinute = (int) world.player1.stateTime / 60;
 			timeString = "TIME : " + timePassedMinute + ":" + timePassedSecond;
 		}
 		if (world.state == World.WORLD_STATE_NEXT_LEVEL) {
@@ -201,11 +186,11 @@ public class GameScreen extends ScreenAdapter {
 		}
 	}
 
-	public void draw () {
+	public void draw (float deltaTime) {
 		GL20 gl = Gdx.gl;
 		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		renderer.render();
+		renderer.render(deltaTime);
 
 		guiCam.update();
 		game.batcher.setProjectionMatrix(guiCam.combined);
@@ -257,12 +242,14 @@ public class GameScreen extends ScreenAdapter {
 		game.batcher.draw(Assets.gameOver, 160 - 160 / 2, 240 - 96 / 2, 160, 96);
 		glyphLayout.setText(Assets.font, scoreString);
 		Assets.font.draw(game.batcher, scoreString, 160 - glyphLayout.width / 2, 480 - 20);
+		glyphLayout.setText(Assets.font, timeString);
+		Assets.font.draw(game.batcher, timeString, 160 - glyphLayout.width / 2, 480 - 40);
 	}
 
 	@Override
 	public void render (float delta) {
 		update(delta);
-		draw();
+		draw(delta);
 	}
 
 	@Override

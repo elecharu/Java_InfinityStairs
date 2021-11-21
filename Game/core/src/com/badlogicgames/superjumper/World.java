@@ -35,13 +35,13 @@ public class World {
 	}
 
 	public static final float WORLD_WIDTH = 10;
-	public static final float WORLD_HEIGHT = 15*1000;
+	public static final float WORLD_HEIGHT = 15*100;
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
 	public static final Vector2 gravity = new Vector2(0, -12);
 
-	public final Player player;
+	public final Player player1;
 	public final Player player2;
 	public final List<Stair> stairs;
 	public final List<Spring> springs;
@@ -56,7 +56,7 @@ public class World {
 	public int state;
 
 	public World (WorldListener listener) {
-		this.player = new Player("Player1", 5, 0.87f, this, Input.Keys.DPAD_LEFT, Input.Keys.DPAD_RIGHT);
+		this.player1 = new Player("Player1", 5, 0.87f, this, Input.Keys.DPAD_LEFT, Input.Keys.DPAD_RIGHT);
 		this.player2 = new Player("Player2", 5, 0.87f, this, Input.Keys.A, Input.Keys.D);
 		this.stairs = new ArrayList<Stair>();
 		this.springs = new ArrayList<Spring>();
@@ -67,7 +67,7 @@ public class World {
 		generateLevel();
 
 		this.heightSoFar = 0;
-		this.score = player.score;
+		this.score = player1.score;
 		this.state = WORLD_STATE_RUNNING;
 	}
 
@@ -90,15 +90,28 @@ public class World {
 		updatePlatforms(deltaTime);
 		updateSquirrels(deltaTime);
 		updateCoins(deltaTime);
-		if (player.state != Player.PLAYER_STATE_HIT) checkCollisions();
+		if (player1.state != Player.PLAYER_STATE_HIT) checkCollisions();
 	}
 
 	private void updateBob (float deltaTime, float accelX) {
-
-		player.update(deltaTime);
+		player1.update(deltaTime);
 		player2.update(deltaTime);
-		score = player.score;
-		heightSoFar = Math.max(player.position.y, heightSoFar);
+		score = player1.score;
+		heightSoFar = Math.max(player1.position.y, heightSoFar);
+		playerFailCheck();
+	}
+
+	private void playerFailCheck(){
+		if((player1.state == Player.PLAYER_STATE_FAIL && player2.state == Player.PLAYER_STATE_FAIL))
+			if(player1.failTime > player2.failTime){
+				if(player1.failTime+1.5 < player1.stateTime){
+					state = WORLD_STATE_GAME_OVER;
+				}
+			}else{
+				if(player2.failTime+1.5 < player2.stateTime){
+					state = WORLD_STATE_GAME_OVER;
+				}
+			}
 	}
 
 	private void updatePlatforms (float deltaTime) {
@@ -139,14 +152,12 @@ public class World {
 
 	}
 
-
-
 	private void checkSquirrelCollisions () {
 		int len = squirrels.size();
 		for (int i = 0; i < len; i++) {
 			Squirrel squirrel = squirrels.get(i);
-			if (squirrel.bounds.overlaps(player.bounds)) {
-				player.hitSquirrel();
+			if (squirrel.bounds.overlaps(player1.bounds)) {
+				player1.hitSquirrel();
 				listener.hit();
 			}
 		}
@@ -156,7 +167,7 @@ public class World {
 		int len = coins.size();
 		for (int i = 0; i < len; i++) {
 			Coin coin = coins.get(i);
-			if (player.bounds.overlaps(coin.bounds)) {
+			if (player1.bounds.overlaps(coin.bounds)) {
 				coins.remove(coin);
 				len = coins.size();
 				listener.coin();
@@ -165,13 +176,13 @@ public class World {
 
 		}
 
-		if (player.velocity.y > 0) return;
+		if (player1.velocity.y > 0) return;
 
 		len = springs.size();
 		for (int i = 0; i < len; i++) {
 			Spring spring = springs.get(i);
-			if (player.position.y > spring.position.y) {
-				if (player.bounds.overlaps(spring.bounds)) {
+			if (player1.position.y > spring.position.y) {
+				if (player1.bounds.overlaps(spring.bounds)) {
 					listener.highJump();
 				}
 			}
