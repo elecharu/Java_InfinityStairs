@@ -42,7 +42,7 @@ public class World {
 	public static final Vector2 gravity = new Vector2(0, -12);
 
 	public final Player player1;
-	public final Player player2;
+	public Player player2;
 	public final List<Stair> stairs;
 	public final List<Spring> springs;
 	public final List<Squirrel> squirrels;
@@ -55,9 +55,17 @@ public class World {
 	public int score;
 	public int state;
 
-	public World (WorldListener listener) {
-		this.player1 = new Player("Player1", 5, 0.87f, this, Input.Keys.DPAD_LEFT, Input.Keys.DPAD_RIGHT);
-		this.player2 = new Player("Player2", 5, 0.87f, this, Input.Keys.A, Input.Keys.D);
+	public boolean isPvP;
+
+	public World (WorldListener listener, boolean isPvP) {
+		this.isPvP = isPvP;
+		if(isPvP){
+			this.player1 = new Player("Player1", 5, 0.87f, this, Input.Keys.DPAD_LEFT, Input.Keys.DPAD_RIGHT);
+			this.player2 = new Player("Player2", 5, 0.87f, this, Input.Keys.A, Input.Keys.D);
+		}else {
+			this.player1 = new Player("Player1", 5, 0.87f, this, Input.Keys.DPAD_LEFT, Input.Keys.DPAD_RIGHT);
+		}
+
 		this.stairs = new ArrayList<Stair>();
 		this.springs = new ArrayList<Spring>();
 		this.squirrels = new ArrayList<Squirrel>();
@@ -85,33 +93,47 @@ public class World {
 		}
 	}
 
-	public void update (float deltaTime, float accelX) {
-		updateBob(deltaTime, accelX);
+	public void update (float deltaTime) {
+		updateBob(deltaTime);
 		updatePlatforms(deltaTime);
 		updateSquirrels(deltaTime);
 		updateCoins(deltaTime);
 		if (player1.state != Player.PLAYER_STATE_HIT) checkCollisions();
 	}
 
-	private void updateBob (float deltaTime, float accelX) {
-		player1.update(deltaTime);
-		player2.update(deltaTime);
+	private void updateBob (float deltaTime) {
+		if(isPvP){
+			player1.update(deltaTime);
+			player2.update(deltaTime);
+		}
+		else {
+			player1.update(deltaTime);
+		}
 		score = player1.score;
 		heightSoFar = Math.max(player1.position.y, heightSoFar);
 		playerFailCheck();
 	}
 
 	private void playerFailCheck(){
-		if((player1.state == Player.PLAYER_STATE_FAIL && player2.state == Player.PLAYER_STATE_FAIL))
-			if(player1.failTime > player2.failTime){
-				if(player1.failTime+1.5 < player1.stateTime){
-					state = WORLD_STATE_GAME_OVER;
+		if(isPvP){
+			if((player1.state == Player.PLAYER_STATE_FAIL && player2.state == Player.PLAYER_STATE_FAIL)){
+				if(player1.failTime > player2.failTime){
+					if(player1.failTime+1.5 < player1.stateTime){
+						state = WORLD_STATE_GAME_OVER;
+					}
+				}else{
+					if(player2.failTime+1.5 < player2.stateTime){
+						state = WORLD_STATE_GAME_OVER;
+					}
 				}
-			}else{
-				if(player2.failTime+1.5 < player2.stateTime){
+			}
+		}else {
+			if(player1.state == Player.PLAYER_STATE_FAIL) {
+				if (player1.failTime + 1.5 < player1.stateTime) {
 					state = WORLD_STATE_GAME_OVER;
 				}
 			}
+		}
 	}
 
 	private void updatePlatforms (float deltaTime) {

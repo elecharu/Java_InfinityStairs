@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
 public class Login extends JFrame {
-    ImageIcon icon;
     //-------------------------------------------------------------------------------------------// 참고할꺼
     private JLabel Logo = new JLabel();
     private JFrame frame = new JFrame();
@@ -69,12 +69,9 @@ public class Login extends JFrame {
     }
     //------------------------------------------------------------------------------------------------------
 
-    public static void main(String[] args) {
-        new Login();
-    }
-
     //------------------------------------------------------------------------------------------------------
 
+    //------------------------------------------------------------------------------------------------------
     public Login() {
         frame.getContentPane().setBackground(Color.WHITE);
         frame.setTitle("무한의 계단");
@@ -101,8 +98,9 @@ public class Login extends JFrame {
         PasswordFind.setBackground(SystemColor.window);
         PasswordFind.setFont(new Font("맑은 고딕", Font.BOLD, 14));
         PasswordFind.setBounds(169, 542, 195, 25);
-        //Logo.setIcon(new ImageIcon("data\\MainLogo.png"));
+        Logo.setIcon(new ImageIcon("desktop\\src\\com\\badlogicgames\\superjumper\\desktop\\MainLogo.png"));
         Logo.setBounds(55, 30, 420, 240);
+
         //------------------------------------------------------------------------------------------------------
         frame.getContentPane().add(IDLabel);
         frame.getContentPane().add(PWLabel);
@@ -111,10 +109,10 @@ public class Login extends JFrame {
         frame.getContentPane().add(LoginButton);
         frame.getContentPane().add(JoinButton);
         frame.getContentPane().add(PasswordFind);
+        frame.getContentPane().add(Logo);
         frame.setVisible(true);
         frame.setResizable(false);	//크기조절
         frame.setLocationRelativeTo(null); //화면중앙배치
-        frame.getContentPane().add(Logo);
         //------------------------------------------------------------------------------------------------------
         LoginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -163,4 +161,9 @@ public class Login extends JFrame {
         });
 
     }
+    //------------------------------------------------------------------------------------------------------
+    public static void main(String[] args) {
+        new Login();
+    }
+    //------------------------------------------------------------------------------------------------------
 }

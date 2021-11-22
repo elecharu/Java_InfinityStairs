@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright 2011 See AUTHORS file.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 
 package com.badlogicgames.superjumper;
 
@@ -38,9 +53,8 @@ public class GameScreen extends ScreenAdapter {
 
 	GlyphLayout glyphLayout = new GlyphLayout();
 
-	public GameScreen (SuperJumper game) {
+	public GameScreen (SuperJumper game, boolean isPvP) {
 		this.game = game;
-
 		state = GAME_READY;
 		guiCam = new OrthographicCamera(320, 480);
 		guiCam.position.set(320 / 2, 480 / 2, 0);
@@ -66,7 +80,7 @@ public class GameScreen extends ScreenAdapter {
 				Assets.playSound(Assets.coinSound);
 			}
 		};
-		world = new World(worldListener);
+		world = new World(worldListener, isPvP);
 		renderer = new WorldRenderer(game.batcher, world);
 		pauseBounds = new Rectangle(320 - 64, 480 - 64, 64, 64);
 		resumeBounds = new Rectangle(160 - 96, 240, 192, 36);
@@ -90,9 +104,6 @@ public class GameScreen extends ScreenAdapter {
 			break;
 		case GAME_PAUSED:
 			updatePaused();
-			break;
-		case GAME_LEVEL_END:
-			updateLevelEnd();
 			break;
 		case GAME_OVER:
 			updateGameOver();
@@ -118,16 +129,10 @@ public class GameScreen extends ScreenAdapter {
 		}
 		
 		ApplicationType appType = Gdx.app.getType();
-		
-		// should work also with Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer)
-		if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
-			world.update(deltaTime, Gdx.input.getAccelerometerX());
-		} else {
-			float accel = 0;
-			if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accel = 5f;
-			if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accel = -5f;
-			world.update(deltaTime, accel);
-		}
+
+
+		world.update(deltaTime);
+
 		if (world.score != lastScore) {
 			lastScore = world.score;
 			scoreString = "SCORE: " + lastScore;
@@ -168,15 +173,6 @@ public class GameScreen extends ScreenAdapter {
 				game.setScreen(new MainMenuScreen(game));
 				return;
 			}
-		}
-	}
-
-	private void updateLevelEnd () {
-		if (Gdx.input.justTouched()) {
-			world = new World(worldListener);
-			renderer = new WorldRenderer(game.batcher, world);
-			world.score = lastScore;
-			state = GAME_READY;
 		}
 	}
 

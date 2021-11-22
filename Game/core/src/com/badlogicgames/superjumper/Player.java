@@ -40,7 +40,6 @@ public class Player extends DynamicGameObject {
 	float failHeight;
 	int KEY_LEFT;
 	int KEY_RIGHT;
-	boolean IsFailed = false;
 
 	public Player(String name, float x, float y, World world, int left, int right) {
 		super(x, y, PLAYER_WIDTH, PLAYER_HEIGHT);
